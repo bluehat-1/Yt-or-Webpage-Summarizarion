@@ -20,5 +20,4 @@ langchain_classic
 pytube
 unstructured
 numexpr
-huggingface_hub
-transformers
+
