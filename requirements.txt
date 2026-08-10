@@ -19,3 +19,6 @@ youtube_transcript_api
 langchain_classic
 pytube
 unstructured
+numexpr
+huggingface_hub
+transformers
