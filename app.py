@@ -1,6 +1,6 @@
 import validators, streamlit as st
 from langchain_core.prompts import PromptTemplate
-from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
+from langchain_groq import ChatGroq
 from langchain_classic.chains.summarize import load_summarize_chain
 from langchain_community.document_loaders import YoutubeLoader, UnstructuredURLLoader
 from dotenv import load_dotenv, find_dotenv
@@ -19,23 +19,15 @@ st.subheader("Summarize URL")
 
 # Get the groq api key and url(YT or website) to be summarized
 with st.sidebar:
-    api_key = st.text_input("HF API Key", value ="", type="password")
+    api_key = st.text_input("Groq API Key", value ="", type="password")
     if api_key == "Sourav":
-        hf_api_key = os.getenv("HF_TOKEN")
+        groq_api_key = os.getenv("GROQ_API_KEY")
     else:
-        hf_api_key = api_key
+        groq_api_key = api_key
 generic_url = st.text_input("URL", label_visibility="collapsed")
 
-## Gemma Model Using HF API
-repo_id = "Qwen/Qwen2.5-7B-Instruct"
-llm_endpoint = HuggingFaceEndpoint(
-    repo_id=repo_id,
-    huggingfacehub_api_token=os.getenv("HF_TOKEN")
-)
-
-llm = ChatHuggingFace(
-    llm=llm_endpoint
-)
+## Gemma Model Using Groq API
+llm = ChatGroq(model="llama-3.1-8b-instant", groq_api_key=groq_api_key)
 
 map_prompt = PromptTemplate(
     template="""
@@ -66,7 +58,7 @@ Section summaries:
 
 if st.button("Summarize the content from YT or Website"):
     ## Validate all the inputs
-    if not hf_api_key.strip() or not generic_url.strip():
+    if not groq_api_key.strip() or not generic_url.strip():
         st.error("Please provide the informaton to get started")
     elif not validators.url(generic_url):
         st.error("Please enter a valid URL. It can be a YT video URL or website URL")
