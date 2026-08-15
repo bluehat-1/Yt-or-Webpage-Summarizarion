@@ -12,13 +12,12 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_classic.chains.summarize import load_summarize_chain
 load_dotenv(find_dotenv())
 
-## Streamlit app ##
+## Streamlit app 
 st.set_page_config(page_title="LangChain: Summarize Text From YT or Website")
 st.title("LangChain: Summarize Text From YT or Website")
 st.subheader("Summarize URL")
 
 # Get the groq api key and url(YT or website) to be summarized 
-####
 with st.sidebar:
     api_key = st.text_input("Groq API Key", value ="", type="password")
     if api_key == "Sourav":
