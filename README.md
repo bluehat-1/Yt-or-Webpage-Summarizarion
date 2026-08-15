@@ -1,6 +1,9 @@
-license: apache-2.0
+---
 title: Summarizer
-sdk: gradio
-emoji: 👀
+emoji: 📚
 colorFrom: blue
-colorTo: purple
+colorTo: green
+sdk: gradio
+app_file: app.py
+pinned: false
+---
