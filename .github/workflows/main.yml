@@ -1,4 +1,5 @@
 name: Sync to Hugging Face hub
+
 on:
   push:
     branches: [main]
@@ -7,12 +8,15 @@ on:
 jobs:
   sync-to-hub:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
           lfs: true
+
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://Souravbhardwaj99:$HF_TOKEN@huggingface.co/spaces/Souravbhardwaj99/summarizer main
+        run: |
+          git push --force https://Souravbhardwaj99:$HF_TOKEN@huggingface.co/spaces/Souravbhardwaj99/summarizer main
